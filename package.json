@@ -1,0 +1,19 @@
+{
+  "name": "emdash-featured-post",
+  "version": "0.1.0",
+  "description": "A native EmDash plugin for choosing one homepage featured post",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./plugin": "./src/plugin.ts",
+    "./admin": "./src/admin.tsx"
+  },
+  "files": ["src", "examples", "README.md"],
+  "keywords": ["emdash", "astro", "cms", "plugin", "featured-post"],
+  "peerDependencies": {
+    "emdash": ">=1.3.1 <2",
+    "@emdash-cms/admin": ">=1.3.1 <2",
+    "react": ">=18 <20"
+  }
+}

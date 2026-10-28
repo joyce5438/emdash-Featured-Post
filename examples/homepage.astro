@@ -1,0 +1,22 @@
+---
+// Adapt this example to your existing homepage and components.
+import { getEmDashCollection, getEmDashEntry, getPluginSettings } from "emdash";
+
+const [{ entries: posts }, settings] = await Promise.all([
+  getEmDashCollection("posts", { orderBy: { published_at: "desc" }, limit: 8 }),
+  getPluginSettings("home-featured"),
+]);
+const selected = settings.selected as { id?: string; slug?: string } | undefined;
+const result = selected?.id && selected.slug
+  ? await getEmDashEntry("posts", selected.slug)
+  : undefined;
+const selectedPost = result?.entry?.data.id === selected?.id ? result.entry : undefined;
+const featuredPost = selectedPost ?? posts.find((post) => post.data.featured_image);
+const otherPosts = posts.filter((post) => post.data.id !== featuredPost?.data.id).slice(0, 6);
+---
+
+{featuredPost && <section>
+  <h2>Featured</h2>
+  <a href={`/posts/${featuredPost.id}`}>{featuredPost.data.title}</a>
+</section>}
+<ul>{otherPosts.map((post) => <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>)}</ul>
