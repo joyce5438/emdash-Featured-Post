@@ -42,7 +42,7 @@ Rebuild and deploy your site. The editor panel alone does **not** alter your hom
 
 ## Settings
 
-Open **首頁精選文章** in the EmDash plugin menu and set the maximum to an integer from 1 to 20 (default: 1). The site template determines the actual layout and must be updated to render multiple entries. If reducing the limit below the number already selected, remove enough selected posts first.
+Open **Featured-Post** in the EmDash plugin menu and set the maximum to an integer from 1 to 20 (default: 1). The site template determines the actual layout and must be updated to render multiple entries. If reducing the limit below the number already selected, remove enough selected posts first.
 
 The settings page lists selected article titles and slugs and allows removal, including when a post has been deleted. Selection is saved as soon as you use the editor control; homepage caches are unaffected.
 

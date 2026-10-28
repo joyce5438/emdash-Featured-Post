@@ -8,7 +8,7 @@ export function featuredPostPlugin(): PluginDescriptor {
 		format: "native",
 		entrypoint: "emdash-featured-post/plugin",
 		adminEntry: "emdash-featured-post/admin",
-		adminPages: [{ path: "/settings", label: "首頁精選文章" }],
+		adminPages: [{ path: "/settings", label: "Featured-Post" }],
 		capabilities: ["content:read"],
 	};
 }

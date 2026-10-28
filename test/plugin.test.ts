@@ -23,7 +23,7 @@ function fixture(legacy?: { id: string; slug: string }) {
 test("legacy single selection and default limit survive upgrade", async () => {
   const { run } = fixture({ id: "old", slug: "old" });
   assert.deepEqual(await run("selection", { action: "get" }), { limit: 1, selected: [{ id: "old", slug: "old" }] });
-  await assert.rejects(run("selection", { action: "select", id: "new" }), /上限/);
+  await assert.rejects(run("selection", { action: "select", id: "new" }), /limit reached/);
   const updated = await run("settings", { action: "save", limit: 3 });
   assert.equal(updated.selected[0].id, "old");
   assert.equal(updated.limit, 3);
@@ -34,10 +34,10 @@ test("limit, removal and invalid inputs preserve selections", async () => {
   await run("settings", { action: "save", limit: 2 });
   await run("selection", { action: "select", id: "one" });
   await run("selection", { action: "select", id: "two" });
-  await assert.rejects(run("selection", { action: "select", id: "three" }), /上限/);
-  await assert.rejects(run("settings", { action: "save", limit: 1 }), /取消/);
-  await assert.rejects(run("selection", { action: "select", id: "draft" }), /發布/);
-  await assert.rejects(run("settings", { action: "save", limit: 0 }), /整數/);
+  await assert.rejects(run("selection", { action: "select", id: "three" }), /limit reached/);
+  await assert.rejects(run("settings", { action: "save", limit: 1 }), /Remove excess posts/);
+  await assert.rejects(run("selection", { action: "select", id: "draft" }), /Publish/);
+  await assert.rejects(run("settings", { action: "save", limit: 0 }), /whole number/);
   const after = await run("selection", { action: "clear", id: "one" });
   assert.deepEqual(after.selected.map((post) => post.id), ["two"]);
   assert.equal((await run("settings", { action: "save", limit: 1 })).limit, 1);
