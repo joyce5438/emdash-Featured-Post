@@ -12,7 +12,9 @@
   "files": [
     "src",
     "examples",
-    "README.md"
+    "README.md",
+    "README.zh-TW.md",
+    "README.ja.md"
   ],
   "keywords": [
     "emdash",

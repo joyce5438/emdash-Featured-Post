@@ -56,7 +56,14 @@ export function createPlugin() {
 				permission: "plugins:manage",
 				handler: async (ctx) => {
 					const input = ctx.input as { action?: string; limit?: number } | undefined;
-					if (input?.action === "get") return normalize(await ctx.settings.get("state"), await ctx.settings.get("selected"));
+					if (input?.action === "get") {
+						const state = normalize(await ctx.settings.get("state"), await ctx.settings.get("selected"));
+						const selected = await Promise.all(state.selected.map(async (item) => {
+							const post = await ctx.content?.get("posts", item.id);
+							return { ...item, title: typeof post?.data?.title === "string" ? post.data.title : undefined };
+						}));
+						return { ...state, selected };
+					}
 					if (input?.action !== "save" || !Number.isInteger(input.limit) || input.limit! < 1 || input.limit! > 20) throw PluginRouteError.badRequest("請輸入 1 到 20 的整數。");
 					for (let attempt = 0; attempt < 4; attempt++) {
 						const stored = await ctx.settings.getVersioned("state");
