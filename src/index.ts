@@ -4,10 +4,11 @@ import type { PluginDescriptor } from "emdash";
 export function featuredPostPlugin(): PluginDescriptor {
 	return {
 		id: "home-featured",
-		version: "0.1.0",
+		version: "0.2.0",
 		format: "native",
 		entrypoint: "emdash-featured-post/plugin",
 		adminEntry: "emdash-featured-post/admin",
+		adminPages: [{ path: "/settings", label: "首頁精選文章" }],
 		capabilities: ["content:read"],
 	};
 }

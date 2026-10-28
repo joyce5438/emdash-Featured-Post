@@ -1,7 +1,7 @@
 {
   "name": "emdash-featured-post",
-  "version": "0.1.0",
-  "description": "A native EmDash plugin for choosing one homepage featured post",
+  "version": "0.2.0",
+  "description": "A native EmDash plugin for choosing homepage featured posts",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -9,11 +9,29 @@
     "./plugin": "./src/plugin.ts",
     "./admin": "./src/admin.tsx"
   },
-  "files": ["src", "examples", "README.md"],
-  "keywords": ["emdash", "astro", "cms", "plugin", "featured-post"],
+  "files": [
+    "src",
+    "examples",
+    "README.md"
+  ],
+  "keywords": [
+    "emdash",
+    "emdash-plugin",
+    "astro",
+    "cms",
+    "plugin",
+    "featured-post"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joyce5438/emdash-Featured-Post.git"
+  },
   "peerDependencies": {
     "emdash": ">=1.3.1 <2",
     "@emdash-cms/admin": ">=1.3.1 <2",
     "react": ">=18 <20"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.ts"
   }
 }

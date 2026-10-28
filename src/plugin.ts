@@ -1,28 +1,71 @@
-import { definePlugin } from "emdash";
+import { definePlugin, PluginRouteError } from "emdash";
 
 const id = "home-featured";
+const pages = [{ path: "/settings", label: "首頁精選文章" }];
+type Selection = { id: string; slug: string };
+type State = { limit: number; selected: Selection[] };
+
+function normalize(raw: unknown, legacy: unknown): State {
+	const state = raw && typeof raw === "object" ? raw as Partial<State> : undefined;
+	const old = legacy && typeof legacy === "object" ? legacy as Partial<Selection> : undefined;
+	const entries = Array.isArray(state?.selected) ? state.selected : old?.id && old.slug ? [old as Selection] : [];
+	return {
+		limit: Number.isInteger(state?.limit) && state!.limit! >= 1 && state!.limit! <= 20 ? state!.limit! : 1,
+		selected: entries.filter((entry) => typeof entry?.id === "string" && typeof entry?.slug === "string"),
+	};
+}
 
 export function createPlugin() {
 	return definePlugin({
 		id,
-		version: "0.1.0",
+		version: "0.2.0",
 		capabilities: ["content:read"],
+		admin: { pages },
 		routes: {
 			selection: {
 				permission: "content:publish_any",
 				handler: async (ctx) => {
 					const input = ctx.input as { action?: string; id?: string } | undefined;
-					if (input?.action === "select" && typeof input.id === "string") {
-						const entry = await ctx.content?.get("posts", input.id);
-						if (!entry || entry.status !== "published" || !entry.slug) throw new Error("請先發佈文章。");
-						await ctx.settings.set("selected", { id: entry.id, slug: entry.slug });
-					} else if (input?.action === "clear" && typeof input.id === "string") {
-						const selected = await ctx.settings.get("selected") as { id?: string } | undefined;
-						if (selected?.id === input.id) await ctx.settings.delete("selected");
-					} else if (input?.action !== "get") {
-						throw new Error("無效的操作。");
+					if (input?.action === "get") {
+						return normalize(await ctx.settings.get("state"), await ctx.settings.get("selected"));
 					}
-					return { selected: await ctx.settings.get("selected") };
+					if (!input?.id || !["select", "clear"].includes(input.action ?? "")) throw PluginRouteError.badRequest("無效的操作。");
+					let entry: Selection | undefined;
+					if (input.action === "select") {
+						const post = await ctx.content?.get("posts", input.id);
+						if (!post || post.status !== "published" || !post.slug) throw PluginRouteError.badRequest("請先發布文章。");
+						entry = { id: post.id, slug: post.slug };
+					}
+					for (let attempt = 0; attempt < 4; attempt++) {
+						const stored = await ctx.settings.getVersioned("state");
+						const state = normalize(stored?.value, await ctx.settings.get("selected"));
+						if (entry) {
+							const index = state.selected.findIndex((item) => item.id === entry!.id);
+							if (index >= 0) state.selected[index] = entry;
+							else {
+								if (state.selected.length >= state.limit) throw PluginRouteError.badRequest(`已達精選上限（${state.limit} 篇），請先取消其他精選文章。`);
+								state.selected.push(entry);
+							}
+						} else state.selected = state.selected.filter((item) => item.id !== input.id);
+						if ((await ctx.settings.compareAndSet("state", stored?.revision ?? null, state)).applied) return state;
+					}
+					throw PluginRouteError.badRequest("設定已變更，請重新整理後再試。");
+				},
+			},
+			settings: {
+				permission: "plugins:manage",
+				handler: async (ctx) => {
+					const input = ctx.input as { action?: string; limit?: number } | undefined;
+					if (input?.action === "get") return normalize(await ctx.settings.get("state"), await ctx.settings.get("selected"));
+					if (input?.action !== "save" || !Number.isInteger(input.limit) || input.limit! < 1 || input.limit! > 20) throw PluginRouteError.badRequest("請輸入 1 到 20 的整數。");
+					for (let attempt = 0; attempt < 4; attempt++) {
+						const stored = await ctx.settings.getVersioned("state");
+						const state = normalize(stored?.value, await ctx.settings.get("selected"));
+						if (input.limit! < state.selected.length) throw PluginRouteError.badRequest("請先取消多出的精選文章，再降低上限。");
+						state.limit = input.limit!;
+						if ((await ctx.settings.compareAndSet("state", stored?.revision ?? null, state)).applied) return state;
+					}
+					throw PluginRouteError.badRequest("設定已變更，請重新整理後再試。");
 				},
 			},
 		},

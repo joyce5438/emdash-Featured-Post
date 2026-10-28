@@ -3,20 +3,30 @@
 import { getEmDashCollection, getEmDashEntry, getPluginSettings } from "emdash";
 
 const [{ entries: posts }, settings] = await Promise.all([
-  getEmDashCollection("posts", { orderBy: { published_at: "desc" }, limit: 8 }),
+  getEmDashCollection("posts", { orderBy: { published_at: "desc" }, limit: 26 }),
   getPluginSettings("home-featured"),
 ]);
-const selected = settings.selected as { id?: string; slug?: string } | undefined;
-const result = selected?.id && selected.slug
-  ? await getEmDashEntry("posts", selected.slug)
-  : undefined;
-const selectedPost = result?.entry?.data.id === selected?.id ? result.entry : undefined;
-const featuredPost = selectedPost ?? posts.find((post) => post.data.featured_image);
-const otherPosts = posts.filter((post) => post.data.id !== featuredPost?.data.id).slice(0, 6);
+type Selection = { id: string; slug: string };
+const state = settings.state as { limit: number; selected: Selection[] } | undefined;
+const legacy = settings.selected as Selection | undefined;
+const selected = state?.selected ?? (legacy?.id && legacy.slug ? [legacy] : []);
+const limit = state?.limit ?? 1;
+const resolved = await Promise.all(selected.slice(0, limit).map(async (item) => {
+  const result = await getEmDashEntry("posts", item.slug);
+  return result.entry?.data.id === item.id ? result.entry : undefined;
+}));
+const featuredPosts = resolved.filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+// Preserve the old automatic fallback only when no valid post is selected.
+if (!featuredPosts.length) {
+  const fallback = posts.find((post) => post.data.featured_image);
+  if (fallback) featuredPosts.push(fallback);
+}
+const featuredIds = new Set(featuredPosts.map((post) => post.data.id));
+const otherPosts = posts.filter((post) => !featuredIds.has(post.data.id)).slice(0, 6);
 ---
 
-{featuredPost && <section>
+<section>
   <h2>Featured</h2>
-  <a href={`/posts/${featuredPost.id}`}>{featuredPost.data.title}</a>
-</section>}
+  {featuredPosts.map((post) => <a href={`/posts/${post.id}`}>{post.data.title}</a>)}
+</section>
 <ul>{otherPosts.map((post) => <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>)}</ul>
