@@ -9,15 +9,15 @@ An EmDash **native plugin** for choosing one or more featured posts on your home
 
 **Post editor** — select or remove a featured post.
 
-![Featured-Post editor panel](docs/images/editor-panel.png)
+<a href="docs/images/editor-panel.png"><img src="docs/images/editor-panel.png" alt="Featured-Post editor panel" width="480"></a>
 
 **Settings** — set the maximum and manage selected posts.
 
-![Featured-Post settings](docs/images/settings.png)
+<a href="docs/images/settings.png"><img src="docs/images/settings.png" alt="Featured-Post settings" width="480"></a>
 
 **Homepage example** — this layout is specific to the example site. The plugin does not create a homepage layout; integrate it with your own theme.
 
-![Example homepage featured post](docs/images/homepage-example.png)
+<a href="docs/images/homepage-example.png"><img src="docs/images/homepage-example.png" alt="Example homepage featured post" width="480"></a>
 
 ## Compatibility and requirements
 

@@ -9,15 +9,15 @@
 
 **記事編集画面**：注目記事の指定と解除。
 
-![Featured-Post の記事編集パネル](docs/images/editor-panel.png)
+<a href="docs/images/editor-panel.png"><img src="docs/images/editor-panel.png" alt="Featured-Post の記事編集パネル" width="480"></a>
 
 **設定画面**：上限と選択済み記事の管理。
 
-![Featured-Post の設定画面](docs/images/settings.png)
+<a href="docs/images/settings.png"><img src="docs/images/settings.png" alt="Featured-Post の設定画面" width="480"></a>
 
 **ホームページの例**：このレイアウトはサンプルサイト固有のものです。プラグインはレイアウトを自動作成しないため、ご自身のテーマに組み込んでください。
 
-![ホームページの注目記事の例](docs/images/homepage-example.png)
+<a href="docs/images/homepage-example.png"><img src="docs/images/homepage-example.png" alt="ホームページの注目記事の例" width="480"></a>
 
 ## 互換性と制限
 

@@ -9,15 +9,15 @@ EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預
 
 **文章編輯頁**：指定或取消精選文章。
 
-![文章編輯頁的 Featured-Post 面板](docs/images/editor-panel.png)
+<a href="docs/images/editor-panel.png"><img src="docs/images/editor-panel.png" alt="文章編輯頁的 Featured-Post 面板" width="480"></a>
 
 **設定頁**：設定數量上限並管理已選文章。
 
-![Featured-Post 設定頁](docs/images/settings.png)
+<a href="docs/images/settings.png"><img src="docs/images/settings.png" alt="Featured-Post 設定頁" width="480"></a>
 
 **首頁範例**：此版型屬於範例網站。外掛不會自動建立首頁版型，請依自己的主題整合。
 
-![首頁精選文章範例](docs/images/homepage-example.png)
+<a href="docs/images/homepage-example.png"><img src="docs/images/homepage-example.png" alt="首頁精選文章範例" width="480"></a>
 
 ## 相容性與限制
 
