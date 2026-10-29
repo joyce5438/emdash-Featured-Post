@@ -5,6 +5,8 @@
 EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預設上限為 1 篇，管理員可設定為 1 至 20 篇。達到上限時，請先取消其他精選文章，再新增下一篇。
 
 
+**需要整合版型：**外掛負責選擇文章；要顯示精選文章，請將其整合至網站主題。請參考下方首頁整合說明。
+
 ## 畫面範例
 
 **文章編輯頁**：指定或取消精選文章。
@@ -21,7 +23,7 @@ EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預
 
 ## 相容性與限制
 
-- 已在 EmDash 與 `@emdash-cms/admin` **1.3.1**、Astro、React 和 Cloudflare Workers 環境建置測試。
+- 已在本機 Cloudflare Workers 模擬環境，搭配 EmDash 與 `@emdash-cms/admin` **1.3.1** 測試。
 - 這是可信任的原生外掛，需作為網站套件安裝，不能從 EmDash 的沙盒外掛 registry 安裝。
 - 範例假設文章集合為 `posts`、圖片欄位為 `featured_image`、文章網址為 `/posts/<slug>`；請依網站結構調整。
 - 文章需先儲存並發布，才能設為精選。精選設定立即儲存，不需要按文章的儲存按鈕。
@@ -38,7 +40,7 @@ EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預
 目前尚未發布到 npm，請在 EmDash 網站專案中從 GitHub 安裝：
 
 ```sh
-npm install github:joyce5438/emdash-Featured-Post
+npm install github:joyce5438/emdash-Featured-Post#v0.2.0
 ```
 
 在 `astro.config.mjs` 中匯入外掛，加入現有 EmDash 的 `plugins` 陣列：

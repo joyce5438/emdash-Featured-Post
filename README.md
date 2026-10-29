@@ -5,6 +5,8 @@ English | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 An EmDash **native plugin** for choosing one or more featured posts on your EmDash site. The selection control appears in an expanded section of an existing post's editor. A site administrator can choose a limit from 1 to 20; once full, remove an existing selection before adding another. Clearing all selections lets your homepage use its own fallback.
 
 
+**Theme integration required:** The plugin selects posts; integrate them into your site’s theme to display them. See [Homepage integration](#homepage-integration).
+
 ## Screenshots
 
 **Post editor** — select or remove a featured post.
@@ -21,7 +23,7 @@ An EmDash **native plugin** for choosing one or more featured posts on your EmDa
 
 ## Compatibility and requirements
 
-- Tested with EmDash and `@emdash-cms/admin` **1.3.1**, Astro, React and Cloudflare Workers.
+- Tested with EmDash and `@emdash-cms/admin` **1.3.1** in a local Cloudflare Workers simulation.
 - This is a trusted native plugin, not a sandboxed plugin. Install it as a site dependency; it cannot be installed from the EmDash sandboxed-plugin registry.
 - The examples assume the collection slug is `posts`, the image field is `featured_image`, and post URLs use `/posts/<slug>`. Adapt the homepage code to your site's schema and routes.
 - The editor panel appears after an entry has been saved. Only published posts can be selected. The operation is saved immediately, independently of the article Save button.
@@ -38,7 +40,7 @@ This is trusted native code running inside the site process, with the authority 
 Install from this GitHub repository in your EmDash site (this project is not currently published to npm):
 
 ```sh
-npm install github:joyce5438/emdash-Featured-Post
+npm install github:joyce5438/emdash-Featured-Post#v0.2.0
 ```
 
 Add the descriptor to your existing EmDash `plugins` array in `astro.config.mjs`, preserving your existing configuration:
