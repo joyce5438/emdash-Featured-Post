@@ -12,6 +12,7 @@
   "files": [
     "src",
     "examples",
+    "docs/images",
     "README.md",
     "README.zh-TW.md",
     "README.ja.md"

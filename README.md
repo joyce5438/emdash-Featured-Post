@@ -4,6 +4,21 @@ English | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 An EmDash **native plugin** for choosing one or more featured posts on your homepage. The selection control appears in an expanded section of an existing post's editor. A site administrator can choose a limit from 1 to 20; once full, remove an existing selection before adding another. Clearing all selections lets your homepage use its own fallback.
 
+
+## Screenshots
+
+**Post editor** — select or remove a featured post.
+
+![Featured-Post editor panel](docs/images/editor-panel.png)
+
+**Settings** — set the maximum and manage selected posts.
+
+![Featured-Post settings](docs/images/settings.png)
+
+**Homepage example** — this layout is specific to the example site. The plugin does not create a homepage layout; integrate it with your own theme.
+
+![Example homepage featured post](docs/images/homepage-example.png)
+
 ## Compatibility and requirements
 
 - Tested with EmDash and `@emdash-cms/admin` **1.3.1**, Astro, React and Cloudflare Workers.

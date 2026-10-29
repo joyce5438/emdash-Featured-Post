@@ -4,6 +4,21 @@
 
 EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預設上限為 1 篇，管理員可設定為 1 至 20 篇。達到上限時，請先取消其他精選文章，再新增下一篇。
 
+
+## 畫面範例
+
+**文章編輯頁**：指定或取消精選文章。
+
+![文章編輯頁的 Featured-Post 面板](docs/images/editor-panel.png)
+
+**設定頁**：設定數量上限並管理已選文章。
+
+![Featured-Post 設定頁](docs/images/settings.png)
+
+**首頁範例**：此版型屬於範例網站。外掛不會自動建立首頁版型，請依自己的主題整合。
+
+![首頁精選文章範例](docs/images/homepage-example.png)
+
 ## 相容性與限制
 
 - 已在 EmDash 與 `@emdash-cms/admin` **1.3.1**、Astro、React 和 Cloudflare Workers 環境建置測試。
