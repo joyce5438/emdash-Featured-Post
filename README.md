@@ -2,7 +2,7 @@
 
 English | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
-An EmDash **native plugin** for choosing one or more featured posts on your homepage. The selection control appears in an expanded section of an existing post's editor. A site administrator can choose a limit from 1 to 20; once full, remove an existing selection before adding another. Clearing all selections lets your homepage use its own fallback.
+An EmDash **native plugin** for choosing one or more featured posts on your EmDash site. The selection control appears in an expanded section of an existing post's editor. A site administrator can choose a limit from 1 to 20; once full, remove an existing selection before adding another. Clearing all selections lets your homepage use its own fallback.
 
 
 ## Screenshots
@@ -15,7 +15,7 @@ An EmDash **native plugin** for choosing one or more featured posts on your home
 
 <a href="docs/images/settings.png"><img src="docs/images/settings.png" alt="Featured-Post settings" width="480"></a>
 
-**Homepage example** — this layout is specific to the example site. The plugin does not create a homepage layout; integrate it with your own theme.
+**Example** — This layout is specific to the example site. The plugin does not create a layout; integrate featured posts into your own theme.
 
 <a href="docs/images/homepage-example.png"><img src="docs/images/homepage-example.png" alt="Example homepage featured post" width="480"></a>
 
