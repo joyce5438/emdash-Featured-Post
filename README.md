@@ -23,7 +23,7 @@ An EmDash **native plugin** for choosing one or more featured posts on your EmDa
 
 ## Compatibility and requirements
 
-- Tested with EmDash and `@emdash-cms/admin` **1.3.1** in a local Cloudflare Workers simulation.
+- Tested with EmDash and `@emdash-cms/admin` **1.3.1** and **1.4.0**.
 - This is a trusted native plugin, not a sandboxed plugin. Install it as a site dependency; it cannot be installed from the EmDash sandboxed-plugin registry.
 - The examples assume the collection slug is `posts`, the image field is `featured_image`, and post URLs use `/posts/<slug>`. Adapt the homepage code to your site's schema and routes.
 - The editor panel appears after an entry has been saved. Only published posts can be selected. The operation is saved immediately, independently of the article Save button.

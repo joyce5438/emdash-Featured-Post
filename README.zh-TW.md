@@ -23,7 +23,7 @@ EmDash **原生外掛**，讓你從文章編輯頁指定首頁精選文章。預
 
 ## 相容性與限制
 
-- 已在本機 Cloudflare Workers 模擬環境，搭配 EmDash 與 `@emdash-cms/admin` **1.3.1** 測試。
+- 已在 EmDash 與 `@emdash-cms/admin` **1.3.1**、**1.4.0** 測試。
 - 這是可信任的原生外掛，需作為網站套件安裝，不能從 EmDash 的沙盒外掛 registry 安裝。
 - 範例假設文章集合為 `posts`、圖片欄位為 `featured_image`、文章網址為 `/posts/<slug>`；請依網站結構調整。
 - 文章需先儲存並發布，才能設為精選。精選設定立即儲存，不需要按文章的儲存按鈕。
